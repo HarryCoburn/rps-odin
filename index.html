@@ -14,6 +14,17 @@
             return moves[sel];
         }
 
+        function playerPlay() {
+            result = window.prompt("Will you throw rock, paper, or scissors?")
+            if (moves.includes(result.toLowerCase())) {
+                return result.toLowerCase();                
+            }
+            else {
+                console.log("Player made an incorrect input");   
+                playerPlay();
+            }
+        }
+
         function playRound(playerSelection, computerSelection) {
             // Tie
             if (playerSelection === computerSelection) {
@@ -45,6 +56,17 @@
 
         }
 
+        function game() {
+            let round = 1;
+            let score = 0;
+
+            while (round < 6) {
+                compThrow = computerPlay();
+                playerThrow = playerPlay();
+                roundWinner = playRound(compthrow, playerThrow);
+                round += 1;
+            }
+        }
     </script>
 </body>
 
