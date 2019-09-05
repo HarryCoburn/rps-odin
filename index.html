@@ -8,10 +8,41 @@
 <body>
     <script>
 
-        const moves = ["Rock", "Paper", "Scissors"];
+        const moves = ["rock", "paper", "scissors"];
         function computerPlay() {
             sel = Math.floor(Math.random() * moves.length);
             return moves[sel];
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            // Tie
+            if (playerSelection === computerSelection) {
+                return "You both throw the same thing! It's a tie!"
+            }
+
+            // Player throws rock
+            if (playerSelection === 'rock') {
+                return (computerSelection === 'paper') ?
+                "You lose! Player's rock loses against computer's paper." :
+                "You win! Player's rock smashes the computer's scissors.";
+            }
+
+            // Player throws scissors
+            if (playerSelection === 'scissors') {
+                return (computerSelection === 'rock') ?
+                "You lose! Player's scissors loses against computer's rock." :
+                "You win! Player's scissors cuts through the computer's paper.";
+            }
+
+            // player throws paper
+            if (playerSelection === 'paper') {
+                return (computerSelection === 'scissors') ?
+                "You lose! Player's paper loses against computer's scissors." :
+                "You win! Player's paper covers the computer's rock.";
+            }
+
+            return "Invalid parameters sent to computerPlay function!"
+
         }
 
     </script>
