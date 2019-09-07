@@ -56,7 +56,7 @@ function game() {
     let score = 0;
     let compScore = 0;
 
-    while (round < 6) {
+    //while (round < 6) {
         let compThrow = computerPlay();
         let playerThrow = playerPlay();
         let roundResult = playRound(playerThrow, compThrow);
@@ -69,7 +69,7 @@ function game() {
         }
 
         round += 1;
-    }
+    //}
 
     console.log("Final player score is: " + score);
     console.log("Final computer score is " + compScore);
