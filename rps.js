@@ -5,28 +5,10 @@ function computerPlay() {
     return moves[sel];
 }
 
-/*
-function playerPlay() {
-    let valid = false;
-    while (valid === false) {
-        // result = window.prompt("Will you throw rock, paper, or scissors?")
-        if (moves.includes(result.toLowerCase())) {
-
-            return result.toLowerCase();
-        }
-        else {
-            console.log("Player made an incorrect input");
-        }
-    }
-
-
-}
-*/
-
-function playRound(playerSelection, computerSelection) {    
+function playRound(playerSelection, computerSelection) {
     // Tie
     if (playerSelection === computerSelection) {
-        return ["You both throw " + playerSelection + "! It's a tie!", 0]
+        return ["You both throw " + playerSelection + "! It's a tie!", 0];
     }
 
     // Player throws rock
@@ -57,18 +39,20 @@ function playRound(playerSelection, computerSelection) {
 function addMessage(text) {
     let message = document.getElementById("message");
     let para = document.createElement('p');
-    para.textContent=text;
-    message.appendChild(para);   
+    para.textContent = text;
+    message.appendChild(para);
 }
 
 function game() {
 
-    let round = 1;
+    let scoreDiv = document.getElementById("scoreDiv");    
     let score = 0;
     let compScore = 0;
-    addMessage("Will you throw rock, paper, or scissors?");
-    
-    
+    scoreDiv.textContent = "Player Score: " + score + " Computer Score: " + compScore;
+
+    addMessage("Will you throw rock, paper, or scissors? First to five wins!");
+
+
     buttons.forEach((button) => {
         button.addEventListener('click', (e) => {
             displayResults(playRound(e.target.id, computerPlay()))
@@ -76,6 +60,7 @@ function game() {
     })
 
     function displayResults(roundResult) {
+
         addMessage(roundResult[0]);
         if (roundResult[1] === 1) score += 1;
         else if (roundResult[1] === -1) compScore += 1;
@@ -83,27 +68,19 @@ function game() {
             score++;
             compScore++;
         }
+        scoreDiv.textContent = "Player Score: " + score + " Computer Score: " + compScore;
 
-        round += 1;
-    //}
-
-        addMessage("Final player score is: " + score);
-        addMessage("Final computer score is " + compScore);
-        if (score > compScore) addMessage("You win!");
-        else if (compScore > score) addMessage("You lose...");
-        else addMessage("It's a tie!");
+        if (score === 5 || compScore === 5) {
+            addMessage("We have a winner!")
+            addMessage("Final player score is: " + score);
+            addMessage("Final computer score is " + compScore);
+            if (score > compScore) addMessage("You win!");
+            else if (compScore > score) addMessage("You lose...");
+            else addMessage("It's a tie!");
+            score = 0;
+            compScore = 0;
+        }
     };
-
-    
-
-
-
-    //while (round < 6) {
-        //let compThrow = computerPlay();
-        //let playerThrow = playerPlay();
-        //let roundResult = playRound(playerThrow, compThrow);
-        
-       
 }
 
 game()
