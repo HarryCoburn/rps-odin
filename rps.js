@@ -23,8 +23,7 @@ function playerPlay() {
 }
 */
 
-function playRound(playerSelection, computerSelection) {
-    console.log("Got here")
+function playRound(playerSelection, computerSelection) {    
     // Tie
     if (playerSelection === computerSelection) {
         return ["You both throw " + playerSelection + "! It's a tie!", 0]
@@ -55,14 +54,21 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
+function addMessage(text) {
+    let message = document.getElementById("message");
+    let para = document.createElement('p');
+    para.textContent=text;
+    message.appendChild(para);   
+}
+
 function game() {
 
     let round = 1;
     let score = 0;
     let compScore = 0;
+    addMessage("Will you throw rock, paper, or scissors?");
     
-    let message = document.getElementById("message");
-    message.textContent = "Will you throw rock, paper, or scissors?";
+    
     buttons.forEach((button) => {
         button.addEventListener('click', (e) => {
             displayResults(playRound(e.target.id, computerPlay()))
@@ -70,7 +76,7 @@ function game() {
     })
 
     function displayResults(roundResult) {
-        console.log(roundResult[0]);
+        addMessage(roundResult[0]);
         if (roundResult[1] === 1) score += 1;
         else if (roundResult[1] === -1) compScore += 1;
         else {
@@ -81,11 +87,11 @@ function game() {
         round += 1;
     //}
 
-        console.log("Final player score is: " + score);
-        console.log("Final computer score is " + compScore);
-        if (score > compScore) console.log("You win!");
-        else if (compScore > score) console.log("You lose...");
-        else console.log("It's a tie!");
+        addMessage("Final player score is: " + score);
+        addMessage("Final computer score is " + compScore);
+        if (score > compScore) addMessage("You win!");
+        else if (compScore > score) addMessage("You lose...");
+        else addMessage("It's a tie!");
     };
 
     
