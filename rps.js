@@ -7,7 +7,7 @@ function computerPlay() {
 function playerPlay() {
     let valid = false;
     while (valid === false) {
-        result = window.prompt("Will you throw rock, paper, or scissors?")
+        // result = window.prompt("Will you throw rock, paper, or scissors?")
         if (moves.includes(result.toLowerCase())) {
 
             return result.toLowerCase();
@@ -52,6 +52,9 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
+    let message = document.getElementById("message");
+    message.textContent = "Will you throw rock, paper, or scissors?";
+
     let round = 1;
     let score = 0;
     let compScore = 0;
