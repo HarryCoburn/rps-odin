@@ -1,9 +1,11 @@
 const moves = ["rock", "paper", "scissors"];
+const buttons = document.querySelectorAll("button");
 function computerPlay() {
     sel = Math.floor(Math.random() * moves.length);
     return moves[sel];
 }
 
+/*
 function playerPlay() {
     let valid = false;
     while (valid === false) {
@@ -19,8 +21,10 @@ function playerPlay() {
 
 
 }
+*/
 
 function playRound(playerSelection, computerSelection) {
+    console.log("Got here")
     // Tie
     if (playerSelection === computerSelection) {
         return ["You both throw " + playerSelection + "! It's a tie!", 0]
@@ -52,17 +56,20 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    let message = document.getElementById("message");
-    message.textContent = "Will you throw rock, paper, or scissors?";
 
     let round = 1;
     let score = 0;
     let compScore = 0;
+    
+    let message = document.getElementById("message");
+    message.textContent = "Will you throw rock, paper, or scissors?";
+    buttons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            displayResults(playRound(e.target.id, computerPlay()))
+        })
+    })
 
-    //while (round < 6) {
-        let compThrow = computerPlay();
-        let playerThrow = playerPlay();
-        let roundResult = playRound(playerThrow, compThrow);
+    function displayResults(roundResult) {
         console.log(roundResult[0]);
         if (roundResult[1] === 1) score += 1;
         else if (roundResult[1] === -1) compScore += 1;
@@ -74,11 +81,23 @@ function game() {
         round += 1;
     //}
 
-    console.log("Final player score is: " + score);
-    console.log("Final computer score is " + compScore);
-    if (score > compScore) console.log("You win!");
-    else if (compScore > score) console.log("You lose...");
-    else console.log("It's a tie!");
+        console.log("Final player score is: " + score);
+        console.log("Final computer score is " + compScore);
+        if (score > compScore) console.log("You win!");
+        else if (compScore > score) console.log("You lose...");
+        else console.log("It's a tie!");
+    };
+
+    
+
+
+
+    //while (round < 6) {
+        //let compThrow = computerPlay();
+        //let playerThrow = playerPlay();
+        //let roundResult = playRound(playerThrow, compThrow);
+        
+       
 }
 
 game()
