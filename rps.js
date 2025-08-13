@@ -72,8 +72,7 @@ Incorrect inputs give the computer the round!`)
         playRound(humanChoice, computerChoice)
         roundCount -= 1
     }
-    endGame()
-   
+    endGame()   
 }
 
 function endGame() {
