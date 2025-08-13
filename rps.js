@@ -5,7 +5,7 @@ let humanScore = 0
 let computerScore = 0
 
 function getComputerChoice() {
-    let seed = Math.floor((Math.random() * 3))    
+    let seed = Math.floor((Math.random() * 3))
     switch (seed) {
         case 0:
             return "rock"
@@ -23,7 +23,7 @@ function getHumanChoice() {
     If the input is invalid, the computer will win the round.
     */
     return prompt("Do you throw rock, paper, or scissors?: ");
-    
+
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -37,13 +37,13 @@ function playRound(humanChoice, computerChoice) {
     // Check who wins
     if ((cleanHumanChoice === "rock") && (computerChoice === "scissors")) {
         console.log("You throw rock and the computer throws scissors. You win!")
-        humanScore += 1    
+        humanScore += 1
     } else if ((cleanHumanChoice === "paper") && (computerChoice === "rock")) {
         console.log("You throw paper and the computer throws rock. You win!")
-        humanScore += 1    
+        humanScore += 1
     } else if ((cleanHumanChoice === "scissors") && (computerChoice === "paper")) {
         console.log("You throw scissors and the computer throws paper. You win!")
-        humanScore += 1    
+        humanScore += 1
     } else { // Computer wins
         console.log(`You throw ${cleanHumanChoice} and the computer throws ${computerChoice}. You lose!`)
         computerScore += 1
@@ -53,11 +53,26 @@ function playRound(humanChoice, computerChoice) {
     return
 }
 
+function playGame() {
+    console.log(`
+Rock Paper Scissors
+        
+Game is played over five rounds. Ties do not score.
+Incorrect inputs give the computer the round!`)
+    roundCount = 5
+    while (roundCount > 0) {
+        computerChoice = getComputerChoice()
+        humanChoice = getHumanChoice()
+        playRound(humanChoice, computerChoice)
+        roundCount -= 1
+    }
+    if (humanScore > computerScore) {
+        console.log("The player wins the RPS game! Go eat a cookie as your reward.")
+    } else if (humanScore === computerScore) {
+        console.log("The game is a tie! You'll need to play again to see who is superior.")
+    } else {
+        console.log("The computer wins the RPS game! Sadness...")
+    }
+}
 
-/* Testing */
-
-
-computerChoice = getComputerChoice()
-humanChoice = getHumanChoice()
-
-playRound(humanChoice, computerChoice)
+playGame()
