@@ -81,12 +81,7 @@ function handleScore(whoWon) {
     return
 }
 
-function playGame(choice) {
-    console.log(`
-Rock Paper Scissors
-        
-Game is played over five rounds. Ties do not score.
-Incorrect inputs give the computer the round!`)
+function playGame(choice) {    
     //roundCount = 5
     //while (roundCount > 0) {
         computerChoice = getComputerChoice()
