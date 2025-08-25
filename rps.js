@@ -5,34 +5,33 @@ let humanScore = 0;
 let computerScore = 0;
 const results = document.querySelector("#results-log")
 
-// Event Handler
+// Event Handler for the user interface.
 const buttonUI = document.querySelector("#buttons");
 buttonUI.addEventListener('click', (event) => {
     let target = event.target;
 
     switch (target.id) {
-        case 'rock':
-            addResult("Rock clicked");
+        case 'rock':           
             playGame("rock");
             break;
-        case 'paper':
-            addResult("Paper clicked");
+        case 'paper':            
             playGame("scissors")
             break;
-        case 'scissors':
-            addResult("Scissors clicked");
+        case 'scissors':            
             playGame("paper")
             break;
     }
 });
 
+
+// Result logging
 function addResult(text) {
     let newResult = document.createElement("p");
     newResult.textContent = text;
     results.appendChild(newResult)
 }
 
-
+// Computer chooses its choice randomly.
 function getComputerChoice() {
     let seed = Math.floor((Math.random() * 3))
     switch (seed) {
@@ -47,33 +46,27 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    /* Note that, for the console version, we are assuming correct inputs every time.
-    If the input is invalid, the computer will win the round.
-    */
-    return prompt("Do you throw rock, paper, or scissors?: ");
-}
 
 function playRound(humanChoice, computerChoice) {
-    cleanHumanChoice = humanChoice.toLowerCase().trim()
+    
     // Tie with Computer
-    if (cleanHumanChoice === computerChoice) {
-        console.log("You tied! The score remains the same.")
-        console.log(`Human: ${humanScore} | Computer: ${computerScore}`)
+    if (humanChoice === computerChoice) {
+        addResult("You tied! The score remains the same.")
+        addResult(`Human: ${humanScore} | Computer: ${computerScore}`)
         return
     }
     // Check who wins
-    if ((cleanHumanChoice === "rock") && (computerChoice === "scissors")) {
-        console.log("You throw rock and the computer throws scissors. You win!")
+    if ((humanChoice === "rock") && (computerChoice === "scissors")) {
+        addResult("You throw rock and the computer throws scissors. You win!")
         handleScore("human")
-    } else if ((cleanHumanChoice === "paper") && (computerChoice === "rock")) {
-        console.log("You throw paper and the computer throws rock. You win!")
+    } else if ((humanChoice === "paper") && (computerChoice === "rock")) {
+        addResult("You throw paper and the computer throws rock. You win!")
         handleScore("human")
-    } else if ((cleanHumanChoice === "scissors") && (computerChoice === "paper")) {
-        console.log("You throw scissors and the computer throws paper. You win!")
+    } else if ((humanChoice === "scissors") && (computerChoice === "paper")) {
+        addResult("You throw scissors and the computer throws paper. You win!")
         handleScore("human")
     } else { // Computer wins
-        console.log(`You throw ${cleanHumanChoice} and the computer throws ${computerChoice}. You lose!`)
+        addResult(`You throw ${humanChoice} and the computer throws ${computerChoice}. You lose!`)
         handleScore("computer")
     }
 }
@@ -84,7 +77,7 @@ function handleScore(whoWon) {
     } else {
         computerScore += 1
     }
-    console.log(`Human: ${humanScore} | Computer: ${computerScore}`)
+    addResult(`Human: ${humanScore} | Computer: ${computerScore}`)
     return
 }
 
@@ -101,12 +94,10 @@ function playGame(choice) {
 
 function endGame() {
     if (humanScore > computerScore) {
-        console.log("The player wins the RPS game! Go eat a cookie as your reward.")
+        addResult("The player wins the RPS game! Go eat a cookie as your reward.")
     } else if (humanScore === computerScore) {
-        console.log("The game is a tie! You'll need to play again to see who is superior.")
+        addResult("The game is a tie! You'll need to play again to see who is superior.")
     } else {
-        console.log("The computer wins the RPS game! Sadness...")
+        addResult("The computer wins the RPS game! Sadness...")
     }
 }
-
-playGame()
