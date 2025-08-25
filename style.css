@@ -1,0 +1,11 @@
+html {
+    background-color: purple;
+}
+
+body {
+    margin: auto;
+    padding-bottom: 10px;
+    width: 50%;
+    text-align: center;
+    background-color: lightgray;
+}
