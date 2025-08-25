@@ -12,12 +12,15 @@ buttonUI.addEventListener('click', (event) => {
     switch(target.id) {
         case 'rock':
             console.log("Rock clicked");
+            playGame("rock")
             break;
         case 'paper':
             console.log("Paper clicked");
+            playGame("scissors")
             break;
         case 'scissors':
             console.log("Scissors clicked");
+            playGame("paper")
             break;
     }
 })
@@ -78,7 +81,7 @@ function handleScore(whoWon) {
     return
 }
 
-function playGame() {
+function playGame(choice) {
     console.log(`
 Rock Paper Scissors
         
@@ -87,11 +90,11 @@ Incorrect inputs give the computer the round!`)
     //roundCount = 5
     //while (roundCount > 0) {
         computerChoice = getComputerChoice()
-        humanChoice = getHumanChoice()
+        humanChoice = choice
         playRound(humanChoice, computerChoice)
-        roundCount -= 1
+        //roundCount -= 1
     // }
-    endGame()   
+    // endGame()   
 }
 
 function endGame() {
