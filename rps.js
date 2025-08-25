@@ -3,25 +3,29 @@
 
 let humanScore = 0;
 let computerScore = 0;
+let roundCount = 5;
+
+const buttonUI = document.querySelector("#buttons");
+buttonUI.addEventListener('click', playerChoice);
+
 const results = document.querySelector("#results-log")
 
 // Event Handler for the user interface.
-const buttonUI = document.querySelector("#buttons");
-buttonUI.addEventListener('click', (event) => {
+function playerChoice(event) {
     let target = event.target;
 
     switch (target.id) {
-        case 'rock':           
+        case 'rock':
             playGame("rock");
             break;
-        case 'paper':            
+        case 'paper':
             playGame("scissors")
             break;
-        case 'scissors':            
+        case 'scissors':
             playGame("paper")
             break;
     }
-});
+}
 
 
 // Result logging
@@ -48,7 +52,6 @@ function getComputerChoice() {
 
 
 function playRound(humanChoice, computerChoice) {
-    
     // Tie with Computer
     if (humanChoice === computerChoice) {
         addResult("You tied! The score remains the same.")
@@ -68,7 +71,7 @@ function playRound(humanChoice, computerChoice) {
     } else { // Computer wins
         addResult(`You throw ${humanChoice} and the computer throws ${computerChoice}. You lose!`)
         handleScore("computer")
-    }
+    }    
 }
 
 function handleScore(whoWon) {
@@ -82,17 +85,20 @@ function handleScore(whoWon) {
 }
 
 function playGame(choice) {
-    //roundCount = 5
-    //while (roundCount > 0) {
     computerChoice = getComputerChoice()
     humanChoice = choice
     playRound(humanChoice, computerChoice)
-    //roundCount -= 1
-    // }
-    // endGame()   
+    roundCount -= 1
+    
+    if (roundCount <= 0) {
+        endGame()
+    }
+
 }
 
 function endGame() {
+    buttonUI.removeEventListener("click", playerChoice)
+
     if (humanScore > computerScore) {
         addResult("The player wins the RPS game! Go eat a cookie as your reward.")
     } else if (humanScore === computerScore) {
@@ -100,4 +106,5 @@ function endGame() {
     } else {
         addResult("The computer wins the RPS game! Sadness...")
     }
+    addResult("Refresh the page to play again.")
 }
