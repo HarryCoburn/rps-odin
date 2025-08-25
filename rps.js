@@ -4,6 +4,25 @@
 let humanScore = 0
 let computerScore = 0
 
+// Event Handler
+const buttonUI = document.querySelector("#buttons");
+buttonUI.addEventListener('click', (event) => {
+    let target = event.target;
+
+    switch(target.id) {
+        case 'rock':
+            console.log("Rock clicked");
+            break;
+        case 'paper':
+            console.log("Paper clicked");
+            break;
+        case 'scissors':
+            console.log("Scissors clicked");
+            break;
+    }
+})
+
+
 function getComputerChoice() {
     let seed = Math.floor((Math.random() * 3))
     switch (seed) {
@@ -65,13 +84,13 @@ Rock Paper Scissors
         
 Game is played over five rounds. Ties do not score.
 Incorrect inputs give the computer the round!`)
-    roundCount = 5
-    while (roundCount > 0) {
+    //roundCount = 5
+    //while (roundCount > 0) {
         computerChoice = getComputerChoice()
         humanChoice = getHumanChoice()
         playRound(humanChoice, computerChoice)
         roundCount -= 1
-    }
+    // }
     endGame()   
 }
 
