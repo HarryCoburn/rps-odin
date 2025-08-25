@@ -1,29 +1,36 @@
 /* RPS for The Odin Project */
 /* Solution by Harry Coburn */
 
-let humanScore = 0
-let computerScore = 0
+let humanScore = 0;
+let computerScore = 0;
+const results = document.querySelector("#results-log")
 
 // Event Handler
 const buttonUI = document.querySelector("#buttons");
 buttonUI.addEventListener('click', (event) => {
     let target = event.target;
 
-    switch(target.id) {
+    switch (target.id) {
         case 'rock':
-            console.log("Rock clicked");
-            playGame("rock")
+            addResult("Rock clicked");
+            playGame("rock");
             break;
         case 'paper':
-            console.log("Paper clicked");
+            addResult("Paper clicked");
             playGame("scissors")
             break;
         case 'scissors':
-            console.log("Scissors clicked");
+            addResult("Scissors clicked");
             playGame("paper")
             break;
     }
-})
+});
+
+function addResult(text) {
+    let newResult = document.createElement("p");
+    newResult.textContent = text;
+    results.appendChild(newResult)
+}
 
 
 function getComputerChoice() {
@@ -68,7 +75,7 @@ function playRound(humanChoice, computerChoice) {
     } else { // Computer wins
         console.log(`You throw ${cleanHumanChoice} and the computer throws ${computerChoice}. You lose!`)
         handleScore("computer")
-    }    
+    }
 }
 
 function handleScore(whoWon) {
@@ -81,25 +88,25 @@ function handleScore(whoWon) {
     return
 }
 
-function playGame(choice) {    
+function playGame(choice) {
     //roundCount = 5
     //while (roundCount > 0) {
-        computerChoice = getComputerChoice()
-        humanChoice = choice
-        playRound(humanChoice, computerChoice)
-        //roundCount -= 1
+    computerChoice = getComputerChoice()
+    humanChoice = choice
+    playRound(humanChoice, computerChoice)
+    //roundCount -= 1
     // }
     // endGame()   
 }
 
 function endGame() {
     if (humanScore > computerScore) {
-            console.log("The player wins the RPS game! Go eat a cookie as your reward.")
-        } else if (humanScore === computerScore) {
-            console.log("The game is a tie! You'll need to play again to see who is superior.")
-        } else {
-            console.log("The computer wins the RPS game! Sadness...")
-        }
+        console.log("The player wins the RPS game! Go eat a cookie as your reward.")
+    } else if (humanScore === computerScore) {
+        console.log("The game is a tie! You'll need to play again to see who is superior.")
+    } else {
+        console.log("The computer wins the RPS game! Sadness...")
+    }
 }
 
 playGame()
